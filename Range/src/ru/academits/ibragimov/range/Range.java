@@ -1,41 +1,23 @@
 package ru.academits.ibragimov.range;
 
-public class Range {
+class Range {
     private double from;
     private double to;
 
-    private Range(double from, double to) {
+    Range(double from, double to) {
         this.from = from;
         this.to = to;
     }
 
-    private double getFrom() {
-        return from;
-    }
-
-
-    private double getTo() {
-        return to;
-    }
-
-
-    private double getDistance() {
-
+    private double getLength() {
         return to - from;
     }
 
-    public void print() {
-        System.out.println(getDistance());
+    void print() {
+        System.out.println(getLength());
     }
 
-    private boolean isInside(double i) {
-        return i >= getFrom() && i <= getTo();
-    }
-
-    public static void main(String[] args) {
-        Range distance = new Range(10.9, 50.1);
-        distance.print();
-        System.out.println(distance.isInside(11));
-
+    boolean isInside(double number) {
+        return number >= from && number <= to;
     }
 }
