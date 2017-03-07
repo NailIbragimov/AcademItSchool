@@ -1,10 +1,12 @@
 package ru.academits.ibragimov.range;
 
-class Range {
-    private double from;
-    private double to;
+import java.util.Arrays;
 
-    Range(double from, double to) {
+public class Range {
+    public double from;
+    public double to;
+
+    public Range(double from, double to) {
         this.from = from;
         this.to = to;
     }
@@ -13,11 +15,33 @@ class Range {
         return to - from;
     }
 
-    void print() {
+    public void print() {
         System.out.println(getLength());
     }
 
-    boolean isInside(double number) {
+    public boolean isInside(double number) {
+
         return number >= from && number <= to;
+
     }
+
+    public Range getCrossing(Range range) {
+        if (Math.min(to, range.to) < Math.max(from, range.from)) {
+            return null;
+        } else return new Range(Math.min(from, range.from), Math.max(to, range.to));
+    }
+
+    public Range[] getAssociation(Range range) {
+        if (Math.min(to, range.to) > Math.max(from, range.from)) {
+            return new Range[]{new Range(Math.min(from, range.from), Math.max(to, range.to))};
+        } else {
+            return new Range[]{(new Range(Math.min(from, range.from), Math.min(to, range.to))), (new Range(Math.max(from, range.from), Math.max(to, range.to)))};
+        }
+
+    }
+   /* public Range[] getDifference(Range range){
+
+    }*/
 }
+
+

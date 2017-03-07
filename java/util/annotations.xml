@@ -1,0 +1,5 @@
+<root>
+    <item name='java.util.Arrays java.lang.String toString(java.lang.Object[])'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>
