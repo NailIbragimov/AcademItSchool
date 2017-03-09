@@ -31,17 +31,25 @@ public class Range {
         } else return new Range(Math.min(from, range.from), Math.max(to, range.to));
     }
 
-    public Range[] getAssociation(Range range) {
+    public Range[] getUnion(Range range) {
         if (Math.min(to, range.to) > Math.max(from, range.from)) {
             return new Range[]{new Range(Math.min(from, range.from), Math.max(to, range.to))};
         } else {
-            return new Range[]{(new Range(Math.min(from, range.from), Math.min(to, range.to))), (new Range(Math.max(from, range.from), Math.max(to, range.to)))};
+            return new Range[]{new Range(Math.min(from, range.from), Math.min(to, range.to)), (new Range(Math.max(from, range.from), Math.max(to, range.to)))};
         }
 
     }
-   /* public Range[] getDifference(Range range){
 
-    }*/
+    public Range[] getDifference(Range range) {
+        if (Math.min(to, range.to) < Math.max(from, range.from)) {
+            return new Range[]{new Range(Math.min(from, range.from), Math.min(to, range.to)), (new Range(Math.max(from, range.from), Math.max(to, range.to)))};
+        } else if (Math.min(to, range.to) > Math.max(from, range.from) || Math.max(from, range.from) < Math.min(from, range.from)) {
+            return new Range[]{new Range(Math.min(from, range.from), Math.max(from, range.from)), (new Range(Math.min(to, range.to), Math.max(to, range.to)))};
+        } else {
+            return new Range[]{new Range(Math.min(from, range.from), Math.max(to, range.to))};
+        }
+
+    }
 }
 
 

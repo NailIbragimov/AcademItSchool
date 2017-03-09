@@ -1,4 +1,5 @@
 package ru.academits.ibragimov.range;
+
 import java.util.Arrays;
 
 public class Main {
@@ -13,7 +14,13 @@ public class Main {
         } else {
             System.out.println("{" + interval1.from + "," + interval1.to + "}");
         }
-        Range [] interval2 = range.getAssociation(distance);
+        Range[] interval2 = range.getUnion(distance);
         System.out.println("Результат объединения интервалов: " + (Arrays.toString(interval2)));
+
+        Range[] interval3 = range.getDifference(distance);
+        System.out.println("Результат разности интервалов: " + (Arrays.toString(interval3)));
+
     }
+
 }
+
