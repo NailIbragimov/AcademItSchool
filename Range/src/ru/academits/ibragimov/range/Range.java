@@ -28,11 +28,13 @@ public class Range {
     public Range getCrossing(Range range) {
         if (Math.min(to, range.to) < Math.max(from, range.from)) {
             return null;
-        } else return new Range(Math.min(from, range.from), Math.max(to, range.to));
+        } else {
+            return new Range(Math.min(from, range.from), Math.max(to, range.to));
+        }
     }
 
     public Range[] getUnion(Range range) {
-        if (Math.min(to, range.to) > Math.max(from, range.from)) {
+        if (Math.min(to, range.to) >= Math.max(from, range.from)) {
             return new Range[]{new Range(Math.min(from, range.from), Math.max(to, range.to))};
         } else {
             return new Range[]{new Range(Math.min(from, range.from), Math.min(to, range.to)), (new Range(Math.max(from, range.from), Math.max(to, range.to)))};
@@ -41,14 +43,17 @@ public class Range {
     }
 
     public Range[] getDifference(Range range) {
-        if (Math.min(to, range.to) < Math.max(from, range.from)) {
-            return new Range[]{new Range(Math.min(from, range.from), Math.min(to, range.to)), (new Range(Math.max(from, range.from), Math.max(to, range.to)))};
-        } else if (Math.min(to, range.to) > Math.max(from, range.from) || Math.max(from, range.from) < Math.min(from, range.from)) {
-            return new Range[]{new Range(Math.min(from, range.from), Math.max(from, range.from)), (new Range(Math.min(to, range.to), Math.max(to, range.to)))};
+        if (range.from <= from && to <= range.to) {
+            return null;
+        } else if (to <= range.from || from >= range.to) {
+            return new Range[]{new Range(from, to)};
+        } else if (range.from <= to && range.to >= to) {
+            return new Range[]{new Range(from, range.from)};
+        } else if (from >= range.from && range.to <= to) {
+            return new Range[]{new Range(range.to, to)};
         } else {
-            return new Range[]{new Range(Math.min(from, range.from), Math.max(to, range.to))};
+            return new Range[]{(new Range(from, range.from)), new Range(range.to, to)};
         }
-
     }
 }
 
