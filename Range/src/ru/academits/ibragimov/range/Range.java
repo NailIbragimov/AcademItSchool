@@ -44,7 +44,7 @@ public class Range {
 
     public Range[] getDifference(Range range) {
         if (range.from <= from && to <= range.to) {
-            return null;
+            return new Range[]{};
         } else if (to <= range.from || from >= range.to) {
             return new Range[]{new Range(from, to)};
         } else if (range.from <= to && range.to >= to) {
